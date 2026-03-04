@@ -1,0 +1,145 @@
+
+Setting environment for using XAMPP for Windows.
+LENOVO@DESKTOP-L4A4GEG c:\xampp_
+# mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 45
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database db_musik;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> use db_musik;
+Database changed
+MariaDB [db_musik]> create table tb_artis(
+    -> id_artis int primary key auto_increment,
+    -> nama_artis varchar(50));
+Query OK, 0 rows affected (0.027 sec)
+
+MariaDB [db_musik]> create table tb_lagu(
+    -> id_lagu int primary key auto_increment,
+    -> judul_lagu varchar(50),
+    -> id_artis int,
+    -> foreign key (id_artis) references tb_artis(id_artis));
+Query OK, 0 rows affected (0.028 sec)
+
+MariaDB [db_musik]> insert into tb_artis
+    -> (id_artis, nama_artis) values
+    -> ('', 'Avril Lavigne');
+Query OK, 1 row affected, 1 warning (0.019 sec)
+
+MariaDB [db_musik]> select * from tb_artis;
++----------+---------------+
+| id_artis | nama_artis    |
++----------+---------------+
+|        1 | Avril Lavigne |
++----------+---------------+
+1 row in set (0.000 sec)
+
+MariaDB [db_musik]> insert into tb_artis
+    -> (id_artis, nama_artis) values
+    -> ('', 'One Direction'),
+    -> ('', 'The Goo Goo Dolls'),
+    -> ('', 'The 1975'),
+    -> ('', 'Last Child');
+Query OK, 4 rows affected, 4 warnings (0.016 sec)
+Records: 4  Duplicates: 0  Warnings: 4
+
+MariaDB [db_musik]> select * from tb_artis;
++----------+-------------------+
+| id_artis | nama_artis        |
++----------+-------------------+
+|        1 | Avril Lavigne     |
+|        2 | One Direction     |
+|        3 | The Goo Goo Dolls |
+|        4 | The 1975          |
+|        5 | Last Child        |
++----------+-------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [db_musik]> insert into tb_lagu
+    -> (id_lagu, judul_lagu, id_artis) values
+    -> ('', 'Wish You Were Here', 1),
+    -> ('', 'You & I', 2),
+    -> ('', 'Iris', 3),
+    -> ('', 'Im In Love With You', 4);
+Query OK, 4 rows affected, 4 warnings (0.005 sec)
+Records: 4  Duplicates: 0  Warnings: 4
+
+MariaDB [db_musik]> select * from tb_lagu;
++---------+---------------------+----------+
+| id_lagu | judul_lagu          | id_artis |
++---------+---------------------+----------+
+|       1 | Wish You Were Here  |        1 |
+|       2 | You & I             |        2 |
+|       3 | Iris                |        3 |
+|       4 | Im In Love With You |        4 |
++---------+---------------------+----------+
+4 rows in set (0.000 sec)
+
+MariaDB [db_musik]> insert into tb_lagu
+    -> (id_lagu, judul_lagu, id_artis) values
+    -> ('', 'Sk8er Boi', 1);
+Query OK, 1 row affected, 1 warning (0.015 sec)
+
+MariaDB [db_musik]> select * from tb_lagu;
++---------+---------------------+----------+
+| id_lagu | judul_lagu          | id_artis |
++---------+---------------------+----------+
+|       1 | Wish You Were Here  |        1 |
+|       2 | You & I             |        2 |
+|       3 | Iris                |        3 |
+|       4 | Im In Love With You |        4 |
+|       5 | Sk8er Boi           |        1 |
++---------+---------------------+----------+
+5 rows in set (0.000 sec)
+
+MariaDB [db_musik]> select tb_lagu.judul_lagu, tb_artis.nama_artis
+    -> from tb_lagu
+    -> inner join tb_artis on tb_lagu.id_artis = tb_artis.id_artis;
++---------------------+-------------------+
+| judul_lagu          | nama_artis        |
++---------------------+-------------------+
+| Wish You Were Here  | Avril Lavigne     |
+| You & I             | One Direction     |
+| Iris                | The Goo Goo Dolls |
+| Im In Love With You | The 1975          |
+| Sk8er Boi           | Avril Lavigne     |
++---------------------+-------------------+
+5 rows in set (0.016 sec)
+
+MariaDB [db_musik]> select tb_artis.nama_artis, tb_lagu.judul_lagu
+    -> from tb_artis
+    -> left join tb_lagu on tb_artis.id_artis = tb_lagu.id_artis;
++-------------------+---------------------+
+| nama_artis        | judul_lagu          |
++-------------------+---------------------+
+| Avril Lavigne     | Wish You Were Here  |
+| One Direction     | You & I             |
+| The Goo Goo Dolls | Iris                |
+| The 1975          | Im In Love With You |
+| Avril Lavigne     | Sk8er Boi           |
+| Last Child        | NULL                |
++-------------------+---------------------+
+6 rows in set (0.020 sec)
+
+MariaDB [db_musik]> select tb_lagu.judul_lagu, tb_artis.nama_artis
+    -> from tb_lagu
+    -> right join tb_artis on tb_lagu.id_artis = tb_artis.id_artis;
++---------------------+-------------------+
+| judul_lagu          | nama_artis        |
++---------------------+-------------------+
+| Wish You Were Here  | Avril Lavigne     |
+| You & I             | One Direction     |
+| Iris                | The Goo Goo Dolls |
+| Im In Love With You | The 1975          |
+| Sk8er Boi           | Avril Lavigne     |
+| NULL                | Last Child        |
++---------------------+-------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [db_musik]>
