@@ -159,8 +159,6 @@ SELECT tb_lagu.judul_lagu, tb_artis.nama_artis
 | NULL                | Last Child        |
 +---------------------+-------------------+
 ```
-📌 HASIL:
-Jika artis tidak punya lagu → hasilnya NULL.
 
 ## 🎯 Kesimpulan
 Dalam project ini kita belajar:
