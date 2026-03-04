@@ -2,12 +2,10 @@
 
 Proyek ini berisi dokumentasi langkah-langkah pembuatan database `db_musik` menggunakan **MariaDB** di lingkungan **XAMPP**. Proyek ini mencakup pembuatan tabel, relasi *foreign key*, operasi *CRUD* dasar, serta implementasi berbagai jenis `JOIN`.
 
-## 🏗️ Persiapan Lingkungan
-
 **Server**: MariaDB via XAMPP 
 **Database Name**: `db_musik`
 
-## 🏗️ Skema Database
+## 🏗️ Struktur Tabel
 
 Database terdiri dari dua tabel utama dengan relasi *One-to-Many* (Satu artis dapat memiliki banyak lagu).
 
@@ -103,7 +101,7 @@ SELECT * FROM tb_lagu;
 |       5 | Sk8er Boi           |        1 |
 +---------+---------------------+----------+
 ```
-## INNER JOIN
+## 🔎 INNER JOIN
 Menampilkan hanya data yang saling cocok.
 ```sql
 SELECT tb_lagu.judul_lagu, tb_artis.nama_artis
@@ -122,7 +120,7 @@ SELECT tb_lagu.judul_lagu, tb_artis.nama_artis
 📌 HASIL:
 Menampilkan lagu beserta nama artisnya.
 
-## LEFT JOIN
+## 🔎 LEFT JOIN
 Menampilkan semua artis walaupun tidak punya lagu.
 ```sql
 SELECT tb_artis.nama_artis, tb_lagu.judul_lagu
@@ -142,7 +140,7 @@ SELECT tb_artis.nama_artis, tb_lagu.judul_lagu
 📌 HASIL:
 Jika artis tidak punya lagu → hasilnya NULL.
 
-## RIGHT JOIN
+## 🔎 RIGHT JOIN
 Menampilkan semua artis dari tabel kanan.
 ```sql
 SELECT tb_lagu.judul_lagu, tb_artis.nama_artis
